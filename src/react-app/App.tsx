@@ -40,7 +40,7 @@ function App() {
 				muted
 				playsInline
 			>
-				<source src="/fireplace.mp4" type="video/mp4" />
+				<source src="https://commondatastorage.googleapis.com/gtv-videos-library/sample/ForBiggerBlazes.mp4" type="video/mp4" />
 				Your browser does not support the video tag.
 			</video>
 
@@ -51,7 +51,7 @@ function App() {
 				autoPlay
 				playsInline
 			>
-				<source src="/christmas-music.mp3" type="audio/mpeg" />
+				<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
 				Your browser does not support the audio element.
 			</audio>
 
