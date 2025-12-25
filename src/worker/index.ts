@@ -6,7 +6,7 @@ const app = new Hono<{ Bindings: Env }>();
 // API endpoint (optional)
 app.get("/api/", (c) => c.json({ name: "Cloudflare" }));
 
-// Serve static files (CSS, JS, etc.)
-app.use("/*", serveStatic({ root: "./" }));
+// Serve static assets
+app.use("/*", serveStatic());
 
 export default app;
