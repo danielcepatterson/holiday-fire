@@ -1,33 +1,61 @@
-# React + Vite + Hono + Cloudflare Workers
+# Holiday Fireplace - Cloudflare Workers
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/vite-react-template)
+A cozy fireplace experience with looping video and Christmas music, running on Cloudflare Workers.
 
-This template provides a minimal setup for building a React application with TypeScript and Vite, designed to run on Cloudflare Workers. It features hot module replacement, ESLint integration, and the flexibility of Workers deployments.
+## Features
 
-![React + TypeScript + Vite + Cloudflare Workers](https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/fc7b4b62-442b-4769-641b-ad4422d74300/public)
+- 🔥 Full-screen fireplace video with Christmas decorations
+- 🎵 Background Christmas music (Frank Sinatra, Henry Mancini style)
+- 🔊 Mute/unmute toggle button
+- 🚀 Deployed globally on Cloudflare Workers
+- 📱 Responsive design
+- ⚡ Lightning-fast performance at the edge
 
-<!-- dash-content-start -->
+## Quick Start
 
-🚀 Supercharge your web development with this powerful stack:
+### Local Development
+```bash
+npm install
+npm run dev
+```
 
-- [**React**](https://react.dev/) - A modern UI library for building interactive interfaces
-- [**Vite**](https://vite.dev/) - Lightning-fast build tooling and development server
-- [**Hono**](https://hono.dev/) - Ultralight, modern backend framework
-- [**Cloudflare Workers**](https://developers.cloudflare.com/workers/) - Edge computing platform for global deployment
+### Deployment to Cloudflare
+```bash
+npm run build
+npm run deploy
+```
 
-### ✨ Key Features
+## Setup Media Files
 
-- 🔥 Hot Module Replacement (HMR) for rapid development
-- 📦 TypeScript support out of the box
-- 🛠️ ESLint configuration included
-- ⚡ Zero-config deployment to Cloudflare's global network
-- 🎯 API routes with Hono's elegant routing
-- 🔄 Full-stack development setup
-- 🔎 Built-in Observability to monitor your Worker
+See [CLOUDFLARE_SETUP.md](./CLOUDFLARE_SETUP.md) for detailed instructions on adding fireplace video and Christmas music.
 
-Get started in minutes with local development or deploy directly via the Cloudflare dashboard. Perfect for building modern, performant web applications at the edge.
+### Option 1: Local Files (Simple)
+1. Add `fireplace.mp4` to `/public`
+2. Add `christmas-music.mp3` to `/public`
+3. Deploy
 
-<!-- dash-content-end -->
+### Option 2: Cloudflare R2 (Recommended for Large Files)
+1. Upload media to R2 bucket
+2. Update URLs in `src/react-app/App.tsx`
+3. Deploy
+
+## Project Structure
+
+```
+src/
+├── react-app/          # React frontend
+│   ├── App.tsx        # Main fireplace component
+│   ├── App.css        # Styling
+│   └── main.tsx       # Entry point
+└── worker/            # Cloudflare Worker backend
+```
+
+## Built With
+
+- [React](https://react.dev/) - UI Library
+- [Vite](https://vite.dev/) - Build Tool
+- [Hono](https://hono.dev/) - Backend Framework
+- [Cloudflare Workers](https://developers.cloudflare.com/workers/) - Deployment Platform
 
 ## Getting Started
 

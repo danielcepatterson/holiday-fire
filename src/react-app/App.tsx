@@ -1,65 +1,70 @@
 // src/App.tsx
 
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import cloudflareLogo from "./assets/Cloudflare_Logo.svg";
-import honoLogo from "./assets/hono.svg";
+import { useState, useRef, useEffect } from "react";
 import "./App.css";
 
 function App() {
-	const [count, setCount] = useState(0);
-	const [name, setName] = useState("unknown");
+	const videoRef = useRef<HTMLVideoElement>(null);
+	const audioRef = useRef<HTMLAudioElement>(null);
+	const [isMuted, setIsMuted] = useState(false);
+
+	useEffect(() => {
+		// Auto-play video on load
+		if (videoRef.current) {
+			videoRef.current.play().catch(() => {
+				// Autoplay might be blocked, user can click to play
+			});
+		}
+		// Auto-play audio on load
+		if (audioRef.current) {
+			audioRef.current.play().catch(() => {
+				// Autoplay might be blocked, user can click to play
+			});
+		}
+	}, []);
+
+	const toggleMute = () => {
+		if (audioRef.current) {
+			audioRef.current.muted = !audioRef.current.muted;
+			setIsMuted(!isMuted);
+		}
+	};
 
 	return (
-		<>
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-				<a href="https://hono.dev/" target="_blank">
-					<img src={honoLogo} className="logo cloudflare" alt="Hono logo" />
-				</a>
-				<a href="https://workers.cloudflare.com/" target="_blank">
-					<img
-						src={cloudflareLogo}
-						className="logo cloudflare"
-						alt="Cloudflare logo"
-					/>
-				</a>
-			</div>
-			<h1>Vite + React + Hono + Cloudflare</h1>
-			<div className="card">
+		<div className="fireplace-container">
+			<video
+				ref={videoRef}
+				className="fireplace-video"
+				loop
+				autoPlay
+				muted
+				playsInline
+			>
+				<source src="/fireplace.mp4" type="video/mp4" />
+				Your browser does not support the video tag.
+			</video>
+
+			<audio
+				ref={audioRef}
+				className="background-music"
+				loop
+				autoPlay
+				playsInline
+			>
+				<source src="/christmas-music.mp3" type="audio/mpeg" />
+				Your browser does not support the audio element.
+			</audio>
+
+			<div className="controls">
 				<button
-					onClick={() => setCount((count) => count + 1)}
-					aria-label="increment"
+					className="mute-button"
+					onClick={toggleMute}
+					aria-label="toggle mute"
 				>
-					count is {count}
+					{isMuted ? "🔇 Unmute" : "🔊 Mute"}
 				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
 			</div>
-			<div className="card">
-				<button
-					onClick={() => {
-						fetch("/api/")
-							.then((res) => res.json() as Promise<{ name: string }>)
-							.then((data) => setName(data.name));
-					}}
-					aria-label="get name"
-				>
-					Name from API is: {name}
-				</button>
-				<p>
-					Edit <code>worker/index.ts</code> to change the name
-				</p>
-			</div>
-			<p className="read-the-docs">Click on the logos to learn more</p>
-		</>
+		</div>
 	);
 }
 
